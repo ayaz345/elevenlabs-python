@@ -89,8 +89,7 @@ class History(Listable, API):
 
     def __iter__(self):
         """Lazy iterator over history items"""
-        for item in self.history:
-            yield item
+        yield from self.history
         while self.has_more:
             history_next = self.from_api(
                 start_after_history_item_id=self.last_history_item_id
@@ -99,5 +98,4 @@ class History(Listable, API):
             self.has_more = history_next.has_more
             self.last_history_item_id = history_next.last_history_item_id
 
-            for item in self.history:
-                yield item
+            yield from self.history

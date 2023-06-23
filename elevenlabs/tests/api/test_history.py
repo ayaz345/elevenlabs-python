@@ -11,7 +11,7 @@ def test_history():
 
     # Test that we can iterate over multiple pages lazily
     it = iter(history)
-    for i in range(page_size * 3):
+    for _ in range(page_size * 3):
         try:
             assert isinstance(next(it), HistoryItem)
         except StopIteration:
