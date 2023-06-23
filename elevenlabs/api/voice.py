@@ -153,11 +153,11 @@ class Voice(API):
         voice_clone: Optional[VoiceClone] = None,
     ) -> Voice:
         url = f"{api_base_url_v1}/voices/{voice_id}/edit"
-        data = {}
-        data.update(dict(name=name) if name else {})
-        data.update(dict(labels=str(labels)) if labels else {})
-        data.update(dict(description=description) if description else {})
-
+        data = (
+            (dict(name=name) if name else {})
+            | (dict(labels=str(labels)) if labels else {})
+            | (dict(description=description) if description else {})
+        )
         files = None
         if voice_clone:
             clone_data = voice_clone.dict()
